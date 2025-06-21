@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fullstack-springboot-keycloak-react-crud-posts.iml" filepath="$PROJECT_DIR$/fullstack-springboot-keycloak-react-crud-posts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Frontend/posts-realm-ui/posts-realm-ui.iml" filepath="$PROJECT_DIR$/Frontend/posts-realm-ui/posts-realm-ui.iml" />
+    </modules>
+  </component>
+</project>
