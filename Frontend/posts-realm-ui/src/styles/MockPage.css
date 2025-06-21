@@ -1,0 +1,76 @@
+.MockPage {
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+
+    font-family: "Jersey 10", sans-serif;
+    font-weight: normal;
+}
+
+.response-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.response-box .label,
+
+.status-box .label {
+    text-align: left;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.response {
+    width: 24rem;
+    height: 10rem;
+    background: #e0e0e0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    overflow: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.status {
+    width: 6rem;
+    height: 10rem;
+    background: #b6ff73;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+
+    font-family: "Jersey 10", sans-serif;
+    font-weight: normal;
+}
+
+.endpoints {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.placeholder {
+    height: 5rem;
+}
