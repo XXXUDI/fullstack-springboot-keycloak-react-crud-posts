@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    default: dev
+
+
+  application:
+    name: api-gateway # Application name | You can see it in Discovery Eureka Server
+
+  # API GATEWAY ROUTES:
+  cloud:
+    gateway:
+      routes:
+        - id: post-service
+          uri: lb://POST-SERVICE
+          predicates:
+            - Path=/api/posts/**
+          filters:
+            - StripPrefix=0
+
+        - id: mock-service
+          uri: lb://MOCK-SERVICE
+          predicates:
+            - Path=/api/mock/**
+          filters:
+            - StripPrefix=0
+
+server:
+  port: 8081 # api-gateway port
+

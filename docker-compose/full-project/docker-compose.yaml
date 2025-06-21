@@ -1,0 +1,87 @@
+version: '3.8'
+
+#
+#     !!! IF YOU WANT TO RUN THIS APPLICATION USING DOCKER-COMPOSE YOU MUST HAVE DEPLOYED KEYCLOAK
+#     !!! THEN CHANGE THE URL IN 'application-docker.yaml' TO YOUR KEYCLOAK URL
+#
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+
+  discovery-server:
+    build:
+      context: ../../Backend/DiscoveryEurekaServer
+    container_name: discovery
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_INSTANCE_HOSTNAME=discovery
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka/
+    networks:
+      - app-network
+
+  post-service:
+    build:
+      context: ../../Backend/PostService
+    container_name: post-service
+    depends_on:
+      - discovery-server
+    command: ["sh", "-c", "sleep 15 && java -jar /app/app.jar"]
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka/
+      - SPRING_APPLICATION_NAME=post-service
+    networks:
+      - app-network
+  mock-service:
+    build: ../../Backend/MockService
+    container_name: mock-service
+    depends_on:
+      - discovery-server
+    command: ["sh", "-c", "sleep 15 && java -jar /app/app.jar"]
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka/
+      - SPRING_APPLICATION_NAME=mock-service
+    networks:
+      - app-network
+  api-gateway:
+    build: ../../Backend/ApiGateway
+    container_name: api-gateway
+    ports:
+      - "8081:8081"
+    depends_on:
+      - discovery-server
+      - mock-service
+      - post-service
+    command: ["sh", "-c", "sleep 20 && java -jar /app/app.jar"]
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8761/eureka/
+      - SPRING_APPLICATION_NAME=api-gateway
+    networks:
+      - app-network
+
+  frontend:
+    build: ../../Frontend/posts-realm-ui
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:
+
+networks:
+  app-network:
+    driver: bridge

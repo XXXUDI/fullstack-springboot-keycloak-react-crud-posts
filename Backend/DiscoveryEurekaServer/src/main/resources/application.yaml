@@ -1,0 +1,10 @@
+spring:
+
+  profiles:
+    default: dev
+
+  application:
+    name: discovery-eureka-server
+
+server:
+  port: 8761

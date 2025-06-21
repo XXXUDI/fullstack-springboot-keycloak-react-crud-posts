@@ -1,0 +1,10 @@
+spring:
+
+  profiles:
+    default: dev
+
+  application:
+    name: mock-service
+
+server:
+  port: 0

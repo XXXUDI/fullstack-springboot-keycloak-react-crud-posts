@@ -1,0 +1,24 @@
+spring:
+  # Security configuration
+  security:
+    oauth2:
+      resourceserver: # KeyCloak | localhost:8080 | Realm: PostsRealm with public key
+        jwt: # Configuration is not recommended for production!
+          issuer-uri: http://<YOUR_KEYCLOAK_URL>:<PORT>/realms/posts-realm # replace url to 'localhost' if run without docker-compose
+
+
+logging: # Debugging | Disable if needed
+  level:
+    org.springframework.web: TRACE
+    org.springframework.cloud.gateway: INFO
+    org.springframework.cloud.client: INFO
+    org.springframework.security: TRACE
+
+eureka:
+  client:
+    serviceUrl: # change url to 'localhost:8761' if run locally
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://discovery:8761/eureka/}
+
+    instance:
+      preferIpAddress: false
+      hostname: ${spring.application.name}

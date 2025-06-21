@@ -1,0 +1,22 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/posts-realm
+
+logging: # Debugging | Disable if needed
+  level:
+    org.springframework.web: TRACE
+    org.springframework.cloud.gateway: INFO
+    org.springframework.cloud.client: INFO
+    org.springframework.security: TRACE
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+    instance:
+      preferIpAddress: false
+      hostname: ${spring.application.name}

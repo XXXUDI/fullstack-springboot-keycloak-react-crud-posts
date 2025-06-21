@@ -1,0 +1,15 @@
+spring:
+  security:
+    oauth2:
+      resourceserver: # KeyCloak | localhost:8080 | Realm: posts-realm with public key
+        jwt:
+          issuer-uri: http://localhost:8080/realms/posts-realm
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+    instance:
+      preferIpAddress: false
+      hostname: ${spring.application.name}
