@@ -105,7 +105,7 @@ spring:
 3. Run docker-compose: `docker-compose up --build`
 4. Configure Keycloak Realm & Client
 Follow the Keycloak setup guide:
-👉 [link](Keycloak Configuration Instructions)
+👉 [link](KeycloakConfigurationGuide.md)
 
 ## 🧪 Development Profiles
 Each service includes multiple profiles:
